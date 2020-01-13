@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>Lab</title>
+  <script type="text/javascript" src="trans.js"></script>
+ </head>
+ <body onload="set_oidc_info()">
+  <h1>Log in</h1>
+  <form id="login_form" action="/login" method="POST">
+ 	Username: <input type="text" id="username" name="username" value="Freda"><br>
+	Password: <input type="password" id="password" name="password" value="123"><br> 
+    <input type="submit" name="submit" value="Submit">
+  </form>
+  <form id="register" action="/reg_page" method="GET">
+  <input type="submit" value="Register"><br>
+  </form>
+  <form id="oidc" action="https://accounts.google.com/o/oauth2/v2/auth" method="GET">
+    <input type="hidden" id="response_type" name="response_type">
+    <input type="hidden" id="client_id" name="client_id">
+    <input type="hidden" id="scope" name="scope">
+    <input type="hidden" id="state" name="state">
+    <input type="hidden" id="nonce" name="nonce">
+    <input type="hidden" id="redirect_uri" name="redirect_uri">
+    <input type="submit" value="Log in from oidc"><br>
+  </form>
+  <div id='err'></div>
+ </body>
+</html>
