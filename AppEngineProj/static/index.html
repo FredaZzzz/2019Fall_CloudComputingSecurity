@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Lab</title>
+<script type="text/javascript" src="trans.js"></script>
+<script>
+  var x = setInterval(function(){
+  var table = document.getElementById("list");
+  var rowNum = table.rows.length;
+  var dateCol = 1;
+  var refreshCol = 2;
+  for (var i=1; i<rowNum; i++)
+  {
+	var datestr = table.rows.item(i).cells.item(dateCol).innerHTML;
+	table.rows.item(i).cells.item(refreshCol).innerHTML = getRemainingTime(datestr);
+  }
+}, 1000);
+</script>
+<style>
+th,td{
+  padding: 5px;
+  text-align: left;
+}
+input[type=text] {
+  width: 200px;
+  padding: 5px 8px;
+  margin: 5px 5px;
+}
+</style>
+</head>
+<body onload="get_events()">
+<div style="width:960px; margin:5px 50px; padding:10 px;">
+<h1>Event list</h1>
+<form action="/logout" method="GET">
+  <input type="submit" value="logout" onclick="delete_cookie()"><br>
+</form>
+<form id="frm1" onsubmit="return false">
+    Event:<input type="text" name="name" value=""><br>
+	Time:<input type="text" name="date" value=""><br> 
+    <input type="submit" name="submit" onclick="postEvent()">
+</form>
+<form id="refresh" action="/index" method="GET">
+  <!--Datastore takes time to store new entry; immediate refresh doesn't work; browser refresh may resubmit form. 
+    Add refresh button to allow user to manually refresh event table-->
+  Hit<input type="submit" value="Refresh">if event submission or deletion is not reflected here.<br>
+</form>
+<table id="list" style="width:600px"> Up-coming Events:
+</table>
+<p id="events"></p>
+</div>
+</body>
+</html>
